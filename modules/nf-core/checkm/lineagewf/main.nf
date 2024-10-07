@@ -4,7 +4,7 @@ process CHECKM_LINEAGEWF {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'biocontainers/checkm-genome:1.2.2--pyhdfd78af_0' :
+        'quay.io/biocontainers/checkm-genome:1.2.2--pyhdfd78af_0' :
         'https://depot.galaxyproject.org/singularity/checkm-genome:1.2.2--pyhdfd78af_0' }"
 
     input:
