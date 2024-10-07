@@ -13,7 +13,7 @@
 **Please note, this code is actively being updated.**
 
 Updates:
-- Genefinder and BLAST functionality has temporarily been removed while the input data file format is changed.
+- BLAST functionality has temporarily been removed while the input data file format is changed.
 - Docker will be supported but has not been fully tested on our systems.
 
 # Table of contents 
