@@ -1,0 +1,33 @@
+{
+"st_ebg_lookup":
+    {
+     "saureus": {
+            "('9',)": "CC9"
+      },
+      "paeruginosa": {
+            "('252',)": "PA14"
+      },
+      "salmonella": {
+            "('19','35',)": "1"
+      },
+      "escherichia-coli": {
+            "('342',)": "ST342"
+      },
+      "campylobacter-jejuni-group": {
+            "('21',)": "ST-21",
+            "('441',)": "ST-441"
+      },
+      "listeria": {
+	    "('739')":"CC739"
+      },
+      "yersinia": {
+            "('3',)": "CC3",
+            "('98',)": "CC98"
+    },
+      "vibrio-cholerae":{
+            "('69',)": "CC69"
+    },
+      "vibrio-parahaemolyticus":{
+            "('3',)": "CC3"}
+    }
+}
