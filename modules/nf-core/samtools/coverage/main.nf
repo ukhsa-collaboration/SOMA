@@ -4,7 +4,7 @@ process SAMTOOLS_COVERAGE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'biocontainers/samtools:1.19.2--h50ea8bc_0' :
+        'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_0' :
         'https://depot.galaxyproject.org/singularity/samtools:1.19.2--h50ea8bc_0' }"
 
     input:
