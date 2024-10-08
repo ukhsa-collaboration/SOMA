@@ -154,7 +154,6 @@ SOMA outputs can be grouped into two major categories:
 ### HTML reports
 - HTML reports can be found in the output 'summary' directory, covering major analysis areas, along with an overall summary report.
     - **<SAMPLE_ID>.<RUN_ID>.summary_report.html** - Simiplified summary detailing all major metrics.
-    - **<SAMPLE_ID>.<RUN_ID>.readqc_report.html** - Read quality metrics, pre- and post- quality control.
     - **<SAMPLE_ID>.<RUN_ID>.taxonomy_report.html** - Read-based taxonomic abundances.
     - **<SAMPLE_ID>.<RUN_ID>.amr_report.html** - Results of AMR typing tools.
     - **<SAMPLE_ID>.<RUN_ID>.summary_binning_report.html** - Summary of binning results.
