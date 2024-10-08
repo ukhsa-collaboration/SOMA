@@ -158,8 +158,9 @@ SOMA outputs can be grouped into two major categories:
     - **<SAMPLE_ID>.<RUN_ID>.taxonomy_report.html** - Read-based taxonomic abundances.
     - **<SAMPLE_ID>.<RUN_ID>.amr_report.html** - Results of AMR typing tools.
     - **<SAMPLE_ID>.<RUN_ID>.summary_binning_report.html** - Summary of binning results.
-      
-- Example reports using data for the ZymoBIOMICS HMW DNA Standard (ERR7287988), can be found **[here](https://github.com/ukhsa-collaboration/SOMA/blob/main/examples/results/)**.
+    - **<SAMPLE_ID>.<RUN_ID>.no_unbinned.summary_binning_report.html** - Summary of binning results, with unbinned contigs removed for reduced HTML file size. 
+
+- Example reports using data for the ZymoBIOMICS Microbial Community DNA Standard (SRR24765780), can be found **[here](https://github.com/ukhsa-collaboration/SOMA/blob/main/examples/results/)**.
 <br>
 <p align="center">
     <img src="docs/images/soma_html_results.png" alt="soma html" width="90%">
