@@ -13,7 +13,7 @@
 **Please note, this code is actively being updated.**
 
 Updates:
-- BLAST functionality has temporarily been removed while the input data file format is changed.
+- Gene database input formats are being updated to make them more user friendly, so are not currently described in the wiki. 
 - Docker will be supported but has not been fully tested on our systems.
 
 # Table of contents 
