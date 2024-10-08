@@ -106,26 +106,27 @@ There is only one mandatory parameter for running SOMA, an input file (format de
 
 The input file (e.g. 'input.tsv') is a five column tab-separated file with the following structure:
 ```
-RUN_ID  BARCODE_ID  SAMPLE_ID   SAMPLE_TYPE /FULL/PATH/TO/FASTQ_FILE
+run_id,sample_id,sample_type,read1,read2,group
 ```
-- _RUN_ID_:                       Run identifier, will determine the highest level directory name in the results directory
-- _BARCODE_ID_:                   Sample barcode 
-- _SAMPLE_ID_:                    Sample identifier, will determine the subdirectory where results are stored per-sample
-- _SAMPLE_TYPE_:                  Sample description, will be added to the reports, but doesn't change how the sample is processed. 
-- _/FULL/PATH/TO/FASTQ_FILE_:     Location of input FASTQ files.
+- _run_id_:                       Run identifier, will determine the highest level directory name in the results directory
+- _sample_id_:                    Sample identifier, will determine the subdirectory where results are stored per-sample
+- _sample_type_:                  Sample description, will be added to the reports, but doesn't change how the sample is processed. 
+- _read1_:     Location of input forward read FASTQ files.
+- _read2_:     Location of input reverse read FASTQ files.
+- _group_:     Group ID, can be any string.
 
   > ℹ️ Input file formatting
   > - Any number of samples can be included provided they do not have both identical RUN_ID and SAMPLE_ID's.
   > - Inputs containing spaces should be enclosed in quotation marks (").
-  > - Periods ('.') will automatically bereplaced with underscores ('_') in the output.
-
+  > - Periods ('.') will automatically be replaced with underscores ('_') in the output.
 
 ### Example input file:
 ```
-RUN01	RB01	SAMPLE_1	BLOOD	/data/reads/SAMPLE_1.BLOOD.fq.gz
-RUN01	RB02	SAMPLE_2	BLOOD	/data/reads/SAMPLE_2.BLOOD.fq.gz
-RUN02	UNKNOWN	SAMPLE_3	SALIVA	/data/reads/SAMPLE_3.NASOPHARYNGEAL.fq.gz
-RUN03	XBD     SAMPLE_1	SKIN	/data/reads/SAMPLE_3.SKIN.fq.gz
+run_id,sample_id,sample_type,read1,read2,group
+RUN01,SAMPLE1,BLOOD,/data/reads/RUN01.SAMPLE_1_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_1_R2.BLOOD.fq.gz,G1
+RUN01,SAMPLE2,BLOOD,/data/reads/RUN01.SAMPLE_2_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_2_R2.BLOOD.fq.gz,G1
+RUN01,SAMPLE3,SALIVA,/data/reads/RUN01.SAMPLE_3_R1.SALIVA.fq.gz,/data/reads/RUN01.SAMPLE_3_R2.SALIVA.fq.gz,G1
+RUN02,SAMPLE1,SKIN,/data/reads/RUN02.SAMPLE_1_R1.SKIN.fq.gz,/data/reads/RUN02.SAMPLE_1_R2.SKIN.fq.gz,G1
 ```
 
 ## Optional parameters
