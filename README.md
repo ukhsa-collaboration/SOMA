@@ -180,7 +180,6 @@ Excluding taxonomic databases will skip the associated step, reducing overall ru
 ```
   --TAXONOMIC_PROFILING.krakendb=""               Skip Kraken2 taxonomic profiling
   --TAXONOMIC_PROFILING.centrifugerdb=""          Skip Centrifuger taxonomic profiling
-  --TAXONOMIC_PROFILING.sylphdb=""                Skip Sylph taxonomic profiling
 ```
 Further tips for optimization can be found on the **[wiki](https://github.com/ukhsa-collaboration/SOMA/wiki/3\).-Running#reducing-runtime-)**.
 
