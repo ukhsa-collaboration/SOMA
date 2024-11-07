@@ -2,7 +2,6 @@ process COMEBIN {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'quay.io/biocontainers/comebin:1.0.4--hdfd78af_0' :
         'https://depot.galaxyproject.org/singularity/comebin:1.0.4--hdfd78af_0' }"
