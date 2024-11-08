@@ -11,7 +11,7 @@ include { SEQTK_RENAME } from '../modules/nf-core/seqtk/rename/main'
 workflow ASSEMBLY {
 
     take:
-    postqc_reads   [ val(meta), path(reads) ]
+    postqc_reads   // [ val(meta), path(reads) ]
 
     main:
     // Assemble, renamed and map cleaned/postqc, paired-end sequence reads
