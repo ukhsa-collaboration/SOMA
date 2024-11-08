@@ -17,12 +17,14 @@ include { HAMRONIZATION_SUMMARIZE } from '../modules/local/hamronization/summari
 workflow AMR_TYPING {
 
     take:
-    ch_assembly
+    ch_assembly   // channel: [ val(meta), path(assembly) ]
 
     main:
+    // Run antimicrobial resistance typing tools
     ch_versions = Channel.empty()
     ch_amr_summarize = Channel.empty()
 
+    // FIX
     if (params.AMRFINDERPLUS_RUN.db) {
         AMRFINDERPLUS_RUN(ch_assembly, params.AMRFINDERPLUS_RUN.db)
         ch_versions = ch_versions.mix(AMRFINDERPLUS_RUN.out.versions) 
@@ -33,7 +35,7 @@ workflow AMR_TYPING {
         ch_amr_summarize = ch_amr_summarize.mix(HAMRONIZATION_AMRFINDERPLUS.out.tsv)
     }
 
-
+    // RUN ABRICATE, summarize with HAMRONIZATION
     ABRICATE_RUN(ch_assembly)
     ch_versions = ch_versions.mix(ABRICATE_RUN.out.versions)
 
@@ -42,6 +44,8 @@ workflow AMR_TYPING {
 
     ch_amr_summarize = ch_amr_summarize.mix(HAMRONIZATION_ABRICATE.out.tsv)
 
+
+    // RUN RGI, summarize with HAMRONIZATION
     RGI_MAIN(ch_assembly)
     ch_versions = ch_versions.mix(RGI_MAIN.out.versions)
 
@@ -50,6 +54,8 @@ workflow AMR_TYPING {
 
     ch_amr_summarize = ch_amr_summarize.mix(HAMRONIZATION_RGI.out.tsv)
 
+
+    // RUN RESFINDER, summarize with HAMRONIZATION
     RESFINDER(ch_assembly)
     ch_versions = ch_versions.mix(RESFINDER.out.versions)
 
@@ -58,12 +64,16 @@ workflow AMR_TYPING {
 
     ch_amr_summarize = ch_amr_summarize.mix(HAMRONIZATION_RESFINDER.out.tsv)
 
+
+    // Summarize POINTFINDER with HAMRONIZATION
     HAMRONIZATION_POINTFINDER(RESFINDER.out.results_pointfinder, "tsv", params.POINTFINDER.db_version, params.POINTFINDER.db_version)
     ch_versions = ch_versions.mix(HAMRONIZATION_POINTFINDER.out.versions)
 
     ch_amr_summarize = ch_amr_summarize.mix(HAMRONIZATION_POINTFINDER.out.tsv)
     ch_amr_summarize = ch_amr_summarize.groupTuple(by: [0])
 
+
+    // MERGE ALL HAMRONIZATION reports
     HAMRONIZATION_SUMMARIZE(ch_amr_summarize, ['tsv', 'json', 'interactive'])
     ch_versions = ch_versions.mix(HAMRONIZATION_SUMMARIZE.out.versions)
 
