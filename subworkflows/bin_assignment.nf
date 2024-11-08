@@ -1,3 +1,8 @@
+/*
+ * Identify prokaryotic and archael contigs and assign them to individual genomes (bins)
+ * Rename binned and unbinned contigs and output metagenome assembled genomes (MAGs) and complete assemblies (MAGs and unbinned contigs)
+ */
+
 include { METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS } from '../modules/nf-core/metabat2/jgisummarizebamcontigdepths/main'                                                                                              
 include { METABAT2_METABAT2 } from '../modules/nf-core/metabat2/metabat2/main'                                                                                                                                    
 include { DASTOOL_DASTOOL } from '../modules/nf-core/dastool/dastool/main'                                                                                                                                        
@@ -17,7 +22,7 @@ include { COMEBIN } from '../modules/local/comebin/main'
 workflow BIN_ASSIGNMENT {
 
     take:
-    assembly_output
+    assembly_output   // [ val(meta), path(assembly), path(bam), path(reads), path(bam_index) ]
 
     main:
     ch_versions = Channel.empty()
