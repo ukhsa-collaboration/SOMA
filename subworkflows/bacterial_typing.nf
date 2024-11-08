@@ -1,3 +1,7 @@
+/*
+ * Coordinates bacterial typing subworkflows
+ */
+
 include { AMR_TYPING } from '../subworkflows/amr_typing.nf'
 include { SEQUENCE_TYPING } from '../subworkflows/sequence_typing.nf'
 include { TARGETED_TYPING } from '../subworkflows/targeted_typing.nf'
