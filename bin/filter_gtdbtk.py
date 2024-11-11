@@ -29,7 +29,7 @@ def filter_gtdbtk(input_file, output_file, ANI_cutoff, align_fraction_cutoff, gt
 	if mode == "Nanopore":
 		merged_gtdbtk['outstring'] = merged_gtdbtk[['user_genome', 'fixed_id','AMRFINDER','RESFINDER','MLST','KROCUS','gene_DB']].apply(lambda x: '.'.join(x), axis=1).replace(' ', '~', regex=True) + '.fasta' # Define output file name (to pass relevant metadata to channel)
 	if mode == "Illumina":
-		merged_gtdbtk['outstring'] = merged_gtdbtk[['user_genome', 'fixed_id','AMRFINDER','RESFINDER','MLST','SRST2','gene_DB']].apply(lambda x: '.'.join(x), axis=1).replace(' ', '~', regex=True) + '.fasta' # Define output file name (to pass relevant metadata to channel)
+		merged_gtdbtk['outstring'] = merged_gtdbtk[['user_genome', 'fixed_id','AMRFINDER','RESFINDER','MLST','KROCUS','gene_DB']].apply(lambda x: '.'.join(x), axis=1).replace(' ', '~', regex=True) + '.fasta' # Define output file name (to pass relevant metadata to channel)
 
 	return(merged_gtdbtk)
 
