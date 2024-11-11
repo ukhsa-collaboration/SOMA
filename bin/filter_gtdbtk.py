@@ -62,7 +62,7 @@ def parse_args():
 	parser.add_argument('--ANI_cutoff', type=float, required=True, help="ANI cutoff value")
 	parser.add_argument('--align_fraction_cutoff', type=float, required=True, help="ANI align fraction cutoff")
 	parser.add_argument('--gtdb_definition_table', required=True, help="GTDB table")
-	parser.add_argument('--mode', required=True, help="Sequencing type (Illumina or Nanopore) determines whether Krocus or SRST2 mode is included downstream")
+	parser.add_argument('--mode', required=True, help="Sequencing type (Illumina or Nanopore)")
 	parser.add_argument("--version", action="version", version='Version: %s' % (__version__))
 
 	return parser.parse_args()
