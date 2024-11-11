@@ -7,11 +7,8 @@ include { METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS } from '../modules/nf-core/metaba
 include { METABAT2_METABAT2 } from '../modules/nf-core/metabat2/metabat2/main'                                                                                                                                    
 include { DASTOOL_DASTOOL } from '../modules/nf-core/dastool/dastool/main'                                                                                                                                        
 include { SEMIBIN_SINGLEEASYBIN } from '../modules/nf-core/semibin/singleeasybin/main'                                                                                                                            
-include { BBMAP_PILEUP } from '../modules/nf-core/bbmap/pileup/main'                                                                                                                                              
-include { FILTER_PILEUP } from '../modules/local/filter_pileup/main'
 include { DASTOOL_FASTATOCONTIG2BIN as DASTOOL_FASTATOCONTIG2BIN_SEMIBIN2 } from '../modules/nf-core/dastool/fastatocontig2bin/main'                                                                                                                    
 include { DASTOOL_FASTATOCONTIG2BIN as DASTOOL_FASTATOCONTIG2BIN_METABAT2 } from '../modules/nf-core/dastool/fastatocontig2bin/main'
-include { DASTOOL_FASTATOCONTIG2BIN as DASTOOL_FASTATOCONTIG2BIN_MAXBIN2 } from '../modules/nf-core/dastool/fastatocontig2bin/main'
 include { FETCH_UNBINNED } from '../modules/local/fetch_unbinned/main'  
 include { RENAME_CONTIGS } from '../modules/local/rename_contigs/main'
 include { TIARA_TIARA } from '../modules/nf-core/tiara/tiara/main'                                                                                                                                                
@@ -57,22 +54,11 @@ workflow BIN_ASSIGNMENT {
     COMEBIN(FILTER_BAM_HEADER.out.reheader_fasta_bam)
     ch_versions = ch_versions.mix(COMEBIN.out.versions)
 
-    BBMAP_PILEUP(ch_filter_bam)
-    ch_versions = ch_versions.mix(BBMAP_PILEUP.out.versions)
-
-    FILTER_PILEUP(BBMAP_PILEUP.out.covstats)
-
-    ch_maxbin_input = ch_filter_fasta.join(FILTER_PILEUP.out.abundance, by: [0]).map {meta -> meta = [meta[0], meta[1],[], meta[2]]}
-
-    MAXBIN2(ch_maxbin_input)
-    ch_versions = ch_versions.mix(MAXBIN2.out.versions)
-
     SEMIBIN_SINGLEEASYBIN(ch_filter_fasta_bam)
     ch_versions = ch_versions.mix(SEMIBIN_SINGLEEASYBIN.out.versions)
 
     DASTOOL_FASTATOCONTIG2BIN_SEMIBIN2(SEMIBIN_SINGLEEASYBIN.out.binned_fastas, "fa")
     DASTOOL_FASTATOCONTIG2BIN_METABAT2(METABAT2_METABAT2.out.fasta, "fa")
-    DASTOOL_FASTATOCONTIG2BIN_MAXBIN2(MAXBIN2.out.binned_fastas, "fasta")
 
     ch_bins_mixed = ch_bins_mixed.mix(DASTOOL_FASTATOCONTIG2BIN_SEMIBIN2.out.fastatocontig2bin)
     ch_bins_mixed = ch_bins_mixed.mix(DASTOOL_FASTATOCONTIG2BIN_METABAT2.out.fastatocontig2bin)
