@@ -1,0 +1,2 @@
+run_id,sample_id,sample_type,read1,read2
+PRJNA759733,SRR15702472,"ZymoBIOMICS Microbial Community Standard",examples/SRR15702472_1.fastq.gz,examples/SRR15702472_2.fastq.gz
