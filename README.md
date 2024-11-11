@@ -46,7 +46,7 @@ A general overview is provided below. Detailed guidance on the installation, usa
 
 The pipeline will perform the following steps: 
 
-**1). Read-base decontamination & quality control** - Assess read quality, remove adapters, filter long-reads by quality and remove host-contaminant reads.\
+**1). Read-base decontamination & quality control** - Assess read quality, remove adapters, filter reads by quality and remove host-contaminant reads.\
 **2). Read-based taxonomic annotation** - Read-based taxonomic classification and standardization.\
 **3). Assembly** - Assembly of reads into metagenome assemblies.\
 **4). Assembly binning** - Classify and bin contigs into individual metagenome assembled genomes (MAGs).\
