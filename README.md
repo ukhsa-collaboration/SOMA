@@ -105,14 +105,13 @@ There is only one mandatory parameter for running SOMA, an input file (format de
 
 The input file (e.g. 'input.tsv') is a five column tab-separated file with the following structure:
 ```
-run_id,sample_id,sample_type,read1,read2,group
+run_id,sample_id,sample_type,read1,read2
 ```
 - _run_id_:                       Run identifier, will determine the highest level directory name in the results directory
 - _sample_id_:                    Sample identifier, will determine the subdirectory where results are stored per-sample
 - _sample_type_:                  Sample description, will be added to the reports, but doesn't change how the sample is processed. 
 - _read1_:     Location of input forward read FASTQ files.
 - _read2_:     Location of input reverse read FASTQ files.
-- _group_:     Group ID, can be any string.
 
   > ℹ️ Input file formatting
   > - Any number of samples can be included provided they do not have both identical RUN_ID and SAMPLE_ID's.
@@ -121,11 +120,11 @@ run_id,sample_id,sample_type,read1,read2,group
 
 ### Example input file:
 ```
-run_id,sample_id,sample_type,read1,read2,group
-RUN01,SAMPLE1,BLOOD,/data/reads/RUN01.SAMPLE_1_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_1_R2.BLOOD.fq.gz,G1
-RUN01,SAMPLE2,BLOOD,/data/reads/RUN01.SAMPLE_2_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_2_R2.BLOOD.fq.gz,G1
-RUN01,SAMPLE3,SALIVA,/data/reads/RUN01.SAMPLE_3_R1.SALIVA.fq.gz,/data/reads/RUN01.SAMPLE_3_R2.SALIVA.fq.gz,G1
-RUN02,SAMPLE1,SKIN,/data/reads/RUN02.SAMPLE_1_R1.SKIN.fq.gz,/data/reads/RUN02.SAMPLE_1_R2.SKIN.fq.gz,G1
+run_id,sample_id,sample_type,read1,read2
+RUN01,SAMPLE1,BLOOD,/data/reads/RUN01.SAMPLE_1_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_1_R2.BLOOD.fq.gz
+RUN01,SAMPLE2,BLOOD,/data/reads/RUN01.SAMPLE_2_R1.BLOOD.fq.gz,/data/reads/RUN01.SAMPLE_2_R2.BLOOD.fq.gz
+RUN01,SAMPLE3,SALIVA,/data/reads/RUN01.SAMPLE_3_R1.SALIVA.fq.gz,/data/reads/RUN01.SAMPLE_3_R2.SALIVA.fq.gz
+RUN02,SAMPLE1,SKIN,/data/reads/RUN02.SAMPLE_1_R1.SKIN.fq.gz,/data/reads/RUN02.SAMPLE_1_R2.SKIN.fq.gz
 ```
 
 ## Optional parameters
