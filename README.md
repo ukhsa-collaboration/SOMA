@@ -158,7 +158,7 @@ SOMA outputs can be grouped into two major categories:
     - **<SAMPLE_ID>.<RUN_ID>.summary_binning_report.html** - Summary of binning results.
     - **<SAMPLE_ID>.<RUN_ID>.no_unbinned.summary_binning_report.html** - Summary of binning results, with unbinned contigs removed for reduced HTML file size. 
 
-- Example reports using data for the ZymoBIOMICS Microbial Community DNA Standard (SRR24765780), can be found **[here](https://github.com/ukhsa-collaboration/SOMA/blob/main/examples/results/)**.
+- Example reports using data for the ZymoBIOMICS Microbial Community Standard (SRR15702472), can be found **[here](https://github.com/ukhsa-collaboration/SOMA/blob/main/examples/results/)**.
 <br>
 <p align="center">
     <img src="docs/images/soma_html_results.png" alt="soma html" width="90%">
