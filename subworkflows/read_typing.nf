@@ -1,6 +1,5 @@
 include { METAMLST } from '../modules/local/metamlst/main'
 include { CONVERT_MLSTTOCC as CONVERT_METAMLSTTOCC } from '../modules/local/convert_mlsttocc/main'
-include { DEEPARG_SR } from '../modules/local/deeparg/sr/main'
 
 workflow READ_TYPING {
 
