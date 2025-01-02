@@ -10,7 +10,7 @@ process COMEBIN {
     tuple val(meta), path(fasta), path(bam)
 
     output:
-    tuple val(meta), path("*.comebin.tsv"), emit: fastatocontig2bin
+    tuple val(meta), path("*.comebin.tsv"), emit: fastatocontig2bin, optional: true
     path "versions.yml"                                                         , emit: versions
 
     when:
@@ -30,9 +30,9 @@ process COMEBIN {
        -a $fasta \\
        -p bam_temp/ \\
        -o ${prefix}_comebin_results \\
-       -t $task.cpus
+       -t $task.cpus  2>/dev/null || echo ""
 
-    cat *_comebin_results/comebin_res/comebin_res.tsv | awk '\$2!="group0"' | awk '{print \$1,"${meta.id}"".comebin."\$2}' OFS='\t' > ${prefix}.comebin.tsv
+    cat *_comebin_results/comebin_res/comebin_res.tsv | awk '\$2!="group0"' | awk '{print \$1,"${meta.id}"".comebin."\$2}' OFS='\t' > ${prefix}.comebin.tsv 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
