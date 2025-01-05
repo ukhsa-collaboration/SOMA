@@ -502,6 +502,7 @@
                 "SUMMARIZE_RESULTS.tax_mode": {
                     "type": "string",
                     "description": "Which taxonomy tool to use in summary report",
+                    "hidden": true,
                     "enum": [
                         "Kraken2",
                         "Centrifuger"
