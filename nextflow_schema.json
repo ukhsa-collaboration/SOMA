@@ -23,20 +23,6 @@
                     "description": "Path to tab-separated file containing sample information (format: run_id\\tbarcode\\tsample_id\\tsample_type,fastq).",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv"
-                },
-                "input_type": {
-                    "type": "string",
-                    "description": "Type of input to be processed, (options: 'fastq' or 'guppy').",
-                    "enum": [
-                        "guppy",
-                        "fastq"
-                    ],
-                    "default": "fastq"
-                },
-                "run_dir": {
-                    "type": "string",
-                    "description": "Directory containing guppy output (only required if '--input guppy').",
-                    "format": "directory-path"
                 }
             }
         },
@@ -69,10 +55,6 @@
                 "validationShowHiddenParams": {
                     "type": "boolean",
                     "description": "Display all parameters."
-                },
-                "print_modules": {
-                    "type": "boolean",
-                    "description": "Print the full list of available modules."
                 }
             }
         },
@@ -134,24 +116,14 @@
             "description": "",
             "default": "",
             "properties": {
-                "FILTLONG.min_length": {
-                    "type": "number",
-                    "default": 650,
-                    "description": "Filtlong: Discard any read shorter than length (bp).",
+                "FASTP.savetrimmedfail": {
+                    "type": "boolean",
+                    "description": "fastp: Save trimmed reads",
                     "hidden": true
                 },
-                "FILTLONG.keep_percent": {
-                    "type": "number",
-                    "default": 95,
-                    "description": "Filtlong: Percentage of dataset retained. By default removes the worst 5% of read bases.",
-                    "hidden": true,
-                    "minimum": 0,
-                    "maximum": 100
-                },
-                "SEQTK_FQCHK.endseq_len": {
-                    "type": "integer",
-                    "default": 300,
-                    "description": "Number of basepairs on either end of reads to plot for quality an adapter content quality control.",
+                "FASTP.savemerged": {
+                    "type": "boolean",
+                    "description": "fastp: Save merged reads",
                     "hidden": true
                 }
             }
@@ -162,17 +134,39 @@
             "description": "",
             "default": "",
             "properties": {
-                "READ_DECONTAMINATION.host_assembly": {
+                "BWAMEM_HOST.genome": {
                     "type": "string",
-                    "description": "Path to host genome assembly.",
+                    "description": "Path to host genome assembly (folder)",
                     "hidden": true,
                     "format": "file-path"
                 },
-                "READ_DECONTAMINATION.host_krakendb": {
+                "KRAKEN2_HOST.db": {
                     "type": "string",
                     "description": "Path to host specific Kraken2 database.",
                     "hidden": true,
                     "format": "directory-path"
+                },
+                "KRAKEN2_HOST.saveoutfastq": {
+                    "type": "boolean",
+                    "default": true,
+                    "hidden": true
+                },
+                "KRAKEN2_HOST_SJB_savereads": {
+                    "type": "boolean",
+                    "hidden": true
+                }
+            }
+        },
+        "read_typing": {
+            "title": "READ_TYPING",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "METAMLST.db": {
+                    "type": "string",
+                    "description": "MetaMLST: database",
+                    "hidden": true
                 }
             }
         },
@@ -194,13 +188,6 @@
                     "hidden": true,
                     "format": "directory-path"
                 },
-                "TAXONOMIC_PROFILING.sylphdb": {
-                    "type": "string",
-                    "description": "Path to Sylph database.",
-                    "hidden": true,
-                    "pattern": "^\\S+\\.syldb$",
-                    "format": "file-path"
-                },
                 "TAXONOMIC_PROFILING.dbdir": {
                     "type": "string",
                     "description": "Path to directory containing: nodes.dmp, names.dmp and merged.dmp files.",
@@ -213,11 +200,10 @@
                     "hidden": true,
                     "format": "file-path"
                 },
-                "new_param_3": {
+                "METAMLST.db": {
                     "type": "string",
-                    "description": "GTDB metadata file (typically gtdb_r*_metadata.tsv.gz).",
-                    "hidden": true,
-                    "format": "file-path"
+                    "description": "MetaMLST: database",
+                    "hidden": true
                 },
                 "PARSE_KRAKEN2HITS.min_target_reads": {
                     "type": "integer",
@@ -248,21 +234,6 @@
                     "hidden": true,
                     "minimum": 0,
                     "maximum": 1
-                },
-                "PARSE_SYLPHHITS.min_target_reads": {
-                    "type": "integer",
-                    "default": 1,
-                    "hidden": true,
-                    "description": "Minimum number of reads required for a Sylph hit to be reported.",
-                    "minimum": 1
-                },
-                "PARSE_SYLPHHITS.min_target_fraction": {
-                    "type": "number",
-                    "default": 0,
-                    "hidden": true,
-                    "description": "Minimum proportion of reads required for a Sylph hit to be reported.",
-                    "minimum": 0,
-                    "maximum": 1
                 }
             }
         },
@@ -272,34 +243,22 @@
             "description": "",
             "default": "",
             "properties": {
-                "FLYE.read_type": {
+                "MEGAHIT.min_contig_len": {
+                    "type": "integer",
+                    "description": "Megahit: Minimum contig length to keep after assembly",
+                    "hidden": true,
+                    "default": 500
+                },
+                "MEGAHIT.presets": {
                     "type": "string",
-                    "description": "Read type for Flye to process.",
-                    "default": "--nano-raw",
-                    "hidden": true,
-                    "enum": [
-                        "--nano-raw",
-                        "--nano-corr",
-                        "--nano-hq"
-                    ]
-                },
-                "ASSEMBLY.racon_rounds": {
-                    "type": "number",
-                    "default": 4,
-                    "description": "Number of rounds of metagenome assembly polishing to perform with Racon.",
-                    "hidden": true,
-                    "minimum": 0,
-                    "maximum": 4
-                },
-                "ASSEMBLY.medaka": {
-                    "type": "boolean",
-                    "hidden": true,
-                    "description": "Perform metagenome assembly polishing with Medaka."
+                    "default": "meta-sensitive",
+                    "description": "Megahit: preset mode",
+                    "hidden": true
                 }
             }
         },
-        "assign_bins": {
-            "title": "ASSIGN_BINS",
+        "bin_assignment": {
+            "title": "BIN_ASSIGNMENT",
             "type": "object",
             "description": "",
             "default": "",
@@ -409,11 +368,6 @@
             "description": "",
             "default": "",
             "properties": {
-                "BIN_TAXONOMY.medaka_mag": {
-                    "type": "boolean",
-                    "description": "Polish individual metagenome assembled genomes with Medaka.",
-                    "hidden": true
-                },
                 "ASSIGN_TAXONOMY.ani_cutoff": {
                     "type": "number",
                     "description": "Minimum average nucleotide identity required to retain a match.",
@@ -538,6 +492,22 @@
                     "format": "file-path"
                 }
             }
+        },
+        "summarize_results": {
+            "title": "SUMMARIZE_RESULTS",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "SUMMARIZE_RESULTS.tax_mode": {
+                    "type": "string",
+                    "description": "Which taxonomy tool to use in summary report",
+                    "enum": [
+                        "Kraken2",
+                        "Centrifuger"
+                    ]
+                }
+            }
         }
     },
     "allOf": [
@@ -563,13 +533,16 @@
             "$ref": "#/definitions/read_decontamination"
         },
         {
+            "$ref": "#/definitions/read_typing"
+        },
+        {
             "$ref": "#/definitions/taxonomic_profiling"
         },
         {
             "$ref": "#/definitions/assembly"
         },
         {
-            "$ref": "#/definitions/assign_bins"
+            "$ref": "#/definitions/bin_assignment"
         },
         {
             "$ref": "#/definitions/contig_qc"
@@ -591,6 +564,9 @@
         },
         {
             "$ref": "#/definitions/create_report"
+        },
+        {
+            "$ref": "#/definitions/summarize_results"
         }
     ]
 }
